@@ -54,9 +54,18 @@ public abstract class BxReq {
         array.add(data);
         // 数据
         byte[] src = array.build();
+
+        // crc校验
+        short crc = BxUtils.CRC16(src, 0, src.length);
+        BxByteArray a = new BxByteArray();
+        a.add(src);
+        a.add(crc);
+
         // 进行转义封装
-        byte[] dst = BxFrameWrapper.wrap(src);
+        byte[] dst = BxFrameWrapper.wrap(a.build());
 
         return dst;
     }
+
+
 }

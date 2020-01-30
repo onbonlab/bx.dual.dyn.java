@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Hello world!
@@ -45,7 +47,10 @@ public class App
             InputStream in = client.getInputStream();
 
             //
-            BxReq req = new BxReqDelDynAll();
+            List<Byte> areas = new ArrayList<Byte>();
+            areas.add((byte)0x00);
+            areas.add((byte)0x03);
+            BxReq req = new BxReqDelDynAreas(areas);
             byte [] seq = req.pack();
 
             // 写入数据

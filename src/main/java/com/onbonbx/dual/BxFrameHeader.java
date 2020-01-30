@@ -3,29 +3,32 @@ package com.onbonbx.dual;
 public class BxFrameHeader {
 
     // 目标地址
-    private short dstAddr = (short) 0xfffe;
+    private short dstAddr = (short) 0xffff;
     // 源地址
     private short srcAddr = (short) 0x8000;
     // 协议版本
-    private byte protocolVer = 0x10;
+    private byte protocolVer = (byte) 0xf0;
     // 保留字
     private byte r0 = 0x00;
     // 控制器型号
-    private short deviceType = (short) 0xfffe;
+    private short deviceType = (short) 0x0266;
+    //private short deviceType = (short) 0xffff;
     // 保留字
     private byte[] r1;
     // 数据长度
     private int dataLen;
 
     public BxFrameHeader() {
-
-        //
-
         // 4个字节的保留字
         r1 = new byte[4];
         for(int i=0; i<4; i++) {
             r1[i] = 0x00;
         }
+    }
+
+    public BxFrameHeader(BxDeviceType device) {
+        this();
+        this.deviceType = (short)device.getCode();
     }
 
     public byte[] build() {
