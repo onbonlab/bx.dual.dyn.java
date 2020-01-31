@@ -1,5 +1,8 @@
 package com.onbonbx.dual;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -20,6 +23,17 @@ public class App
         System.out.println( "Hello World!" );
 
 
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("e:\\demo.bmp"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BxPageBmp page = new BxPageBmp(img);
+
+        BxAreaDynamic area = new BxAreaDynamic((byte) 0, (short) 64, (short)0, (short)64, (short)16);
+        area.addPage(page);
+        area.build();
 
         //
         // 创建 Socket
