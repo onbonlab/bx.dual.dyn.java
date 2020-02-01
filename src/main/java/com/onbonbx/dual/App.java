@@ -24,16 +24,29 @@ public class App
 
 
         BufferedImage img = null;
+        BufferedImage img2 = null;
+
         try {
-            img = ImageIO.read(new File("e:\\demo.bmp"));
+            img = ImageIO.read(new File("e:\\p1.png"));
+            img2 = ImageIO.read(new File("e:\\p2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        BxPageBmp page = new BxPageBmp(img);
 
-        BxAreaDynamic area = new BxAreaDynamic((byte) 0, (short) 64, (short)0, (short)64, (short)16);
+
+        BxAreaDynamic area = new BxAreaDynamic(0, 64, 0, 64, 64);
+        area.clearAttachedProList();
+        area.attachToProgram(0);
+        area.setAttachToAllPro(false);
+
+        BxPageBmp page = new BxPageBmp(img);
+        BxPageBmp p2 = new BxPageBmp(img2);
         area.addPage(page);
-        area.build();
+        area.addPage(p2);
+
+        BxReq req = new BxReqSendDynArea(area);
+        byte[] data = req.pack();
+        BxDebugFileWriter.writeToFile(data, "e:\\a.txt");
 
         //
         // 创建 Socket
@@ -61,11 +74,14 @@ public class App
             InputStream in = client.getInputStream();
 
             //
+            /*
             List<Byte> areas = new ArrayList<Byte>();
             areas.add((byte)0x00);
             areas.add((byte)0x03);
-            BxReq req = new BxReqDelDynAreas(areas);
+            req = new BxReqDelDynAreas(areas);
+             */
             byte [] seq = req.pack();
+
 
             // 写入数据
             out.write(seq);

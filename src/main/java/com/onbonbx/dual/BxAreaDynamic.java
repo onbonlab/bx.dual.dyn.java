@@ -37,24 +37,25 @@ public class BxAreaDynamic extends BxArea {
     // page 页
     List<BxPage> pages = new ArrayList<>();
 
-    public BxAreaDynamic(short x, short y, short w, short h) {
+    public BxAreaDynamic(int x, int y, int w, int h) {
         this.id = 0x00;
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        this.x = (short) x;
+        this.y = (short) y;
+        this.w = (short) w;
+        this.h = (short) h;
     }
 
-    public BxAreaDynamic(byte id, short x, short y, short w, short h) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+    public BxAreaDynamic(int id, int x, int y, int w, int h) {
+        this.id = (byte) id;
+        this.x = (short) x;
+        this.y = (short) y;
+        this.w = (short) w;
+        this.h = (short) h;
     }
 
     @Override
-    public byte[] build() {
+    public BxData build() {
+
 
         BxByteArray array = new BxByteArray();
         // 区域 id
@@ -103,7 +104,7 @@ public class BxAreaDynamic extends BxArea {
         // areaEqual
         // 0x00 - 前后背景相同
         // 0x01 - 前后背景不同
-        array.add(0x00);
+        array.add((byte) 0x00);
 
         // 是否使能语音
         // 0x00
@@ -144,10 +145,11 @@ public class BxAreaDynamic extends BxArea {
 
         //
         // 将页数据附加到最后
-        array.add(dataArray.build());
+        //array.add(dataArray.build());
+        BxData bd = new BxData(array.build(), dataArray.build());
 
         //
-        return array.build();
+        return bd;
     }
 
     public void addPage(BxPage page) {
@@ -162,8 +164,8 @@ public class BxAreaDynamic extends BxArea {
      *  将区域附加到指定的节目
      * @param pid 节目 id
      */
-    public void attachToProgram(short pid) {
-        attachedProList.add(pid);
+    public void attachToProgram(int pid) {
+        attachedProList.add((short)pid);
     }
 
     /**

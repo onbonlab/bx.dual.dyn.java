@@ -24,7 +24,19 @@ public class BxReqSendDynArea extends BxReq {
         // 固定为 0x01
         array.add((short)0x01);
 
+        //
+        BxData bd = area.build();
 
-        return new byte[0];
+        // 数据长度
+        array.add(bd.para.length);
+
+        // 参数
+        array.add(bd.para);
+
+        // 数据
+        array.add(bd.data);
+
+        // 返回参数
+        return array.build();
     }
 }
