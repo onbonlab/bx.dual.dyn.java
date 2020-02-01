@@ -4,7 +4,12 @@ BX-6Q1/6Q2/6Q3 的动态区 JAVA API。
 
 ## MAVEN 引用
 可以通过 MAVEN 来引用此 Package，方法如下：
+
 https://github.com/onbonlab/bx.dual.dyn.java/packages/118223
+
+或者直接下载 jar 包，添加到本地工程
+
+https://github.com/onbonlab/bx.dual.dyn.java/releases
 
 ## 支持的功能
 * 删除动态区
