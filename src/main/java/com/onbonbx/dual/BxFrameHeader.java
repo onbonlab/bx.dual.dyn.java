@@ -57,6 +57,42 @@ public class BxFrameHeader {
         return array.build();
     }
 
+    public static BxFrameHeader parse(byte[] data, int offset) {
+
+        BxFrameHeader header = new BxFrameHeader();
+
+        int addr = offset;
+
+        // 目标地址
+        header.dstAddr = BxUtils.bytesToShort(data, addr, BxUtils.ENDIAN.LITTLE);
+        addr += 2;
+
+        // 源地址
+        header.srcAddr = BxUtils.bytesToShort(data, addr, BxUtils.ENDIAN.LITTLE);
+        addr += 2;
+
+        // 协议版本
+        header.protocolVer = data[addr++];
+
+        // 保留字
+        header.r0 = data[addr++];
+
+        // 设备类型
+        header.deviceType = BxUtils.bytesToShort(data, addr, BxUtils.ENDIAN.LITTLE);
+        addr += 2;
+
+        // 保留字
+        for(int i=0; i<4; i++) {
+            header.r1[i] = data[addr++];
+        }
+
+        // 数据长度
+        header.dataLen = BxUtils.bytesToInt(data, addr, BxUtils.ENDIAN.LITTLE);
+        addr += 4;
+
+        return header;
+    }
+
     public short getDstAddr() {
         return dstAddr;
     }

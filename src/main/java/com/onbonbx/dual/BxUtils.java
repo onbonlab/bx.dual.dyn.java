@@ -63,6 +63,35 @@ public class BxUtils {
         return result;
     }
 
+    //
+    // 将字节转换成short 型
+    public static final int bytesToInt(byte[] src, int start, ENDIAN endian) {
+
+        int result = 0;
+        int temp;
+
+        if(endian == ENDIAN.LITTLE) {
+            result = src[start+3];
+            result <<= 24;
+            temp = src[start+2];
+            result |= ((temp << 16));
+            temp = src[start+1];
+            result |= temp;
+            result |= src[start];
+        }
+        else {
+            result = src[start];
+            result <<= 24;
+            temp = src[start+1];
+            result |= ((temp << 16));
+            temp = src[start+2];
+            result |= temp;
+            result |= src[start+3];
+        }
+
+        return result;
+    }
+
 
     /**
      * 用于对数据哉进行校验的 CRC16 算法

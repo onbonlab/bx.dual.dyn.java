@@ -15,7 +15,7 @@ public abstract class BxPage {
     // 重复次数
     private byte repeatTime = 0x01;
     // 有效长度
-    private short validLen;
+    private short validLen = 0x00;
     // 保留字 - 9bytes
     private byte [] r0 = new byte[9];
 
@@ -43,7 +43,13 @@ public abstract class BxPage {
         // 重复次数
         array.add(repeatTime);
         // 有效长度
-        array.add(w);
+        if(validLen == 0) {
+            array.add(w);
+        }
+        else {
+            array.add(validLen);
+        }
+
         // 保留字
         array.add(r0);
 
