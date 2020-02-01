@@ -6,7 +6,7 @@
 
   <groupId>com.onbonbx.dual</groupId>
   <artifactId>dynamic</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <name>dynamic</name>
   <!-- FIXME change it to the project's website -->
@@ -26,6 +26,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>dynamic</id>
+      <name>dual.dynamic.area</name>
+      <url>https://maven.pkg.github.com/onbonlab/bx.dual.dyn.java/</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

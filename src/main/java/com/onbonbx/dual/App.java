@@ -73,7 +73,7 @@ public class App
 
             // 生成命令序列
             byte [] seq = req.pack();
-
+            BxDebugFileWriter.writeToFile(seq, "d:\\data.txt");
             // 发送命令
             out.write(seq);
 
@@ -91,6 +91,8 @@ public class App
                 System.out.println("NACK");
             }
 
+            //
+            // 以下为删除动态区的流程
             // 创建一个 list，其中包含要删除的动态区 id
             List<Byte> areas = new ArrayList<Byte>();
             areas.add((byte)0x00);

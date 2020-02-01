@@ -1,7 +1,5 @@
 package com.onbonbx.dual;
 
-import sun.awt.image.OffScreenImage;
-
 import java.util.List;
 
 public class BxResp {
